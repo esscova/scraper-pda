@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Produtos GPA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- atributo data-initial-term para passar o valor ao JS -->
+    <div class="container" data-initial-term="{{ initial_search_term or '' }}">
+        <h1>Busca de Produtos</h1>
+
+        <!-- form busca -->
+        <form method="GET" action="/" id="search-form">
+            <div class="form-group">
+                <div style="flex-grow: 1;">
+                  <label for="term">Produto:</label>
+                  <input type="text" id="term" name="term" placeholder="Digite o nome do produto"
+                         value="{{ initial_search_term if initial_search_term else '' }}" required>
+                </div>
+                <button type="submit">Buscar</button>
+                <button type="button" id="download-button" disabled>Baixar CSV</button>
+            </div>
+        </form>
+
+        <!-- status e results  -->
+        <div id="results-area">
+            <div id="status-messages">
+                <p id="loading-message" style="display: none;">Aguarde, buscando dados...</p>
+                <p id="error-message" style="display: none;"></p>
+                <p id="summary-message" style="display: none;"></p>
+            </div>
+            <ul id="product-list"></ul>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>
